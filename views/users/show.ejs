@@ -1,0 +1,168 @@
+<%- include('../shared/admin/header') -%>
+    <!-- ======== sidebar-nav start =========== -->
+    <%- include('../shared/admin/menu-left') -%>
+        <!-- ======== sidebar-nav end =========== -->
+
+        <!-- ======== main-wrapper start =========== -->
+        <main class="main-wrapper">
+            <!-- ========== header start ========== -->
+            <%- include('../shared/admin/menu-top') -%>
+                <!-- ========== header end ========== -->
+
+                <!-- ========== section start ========== -->
+                <section class="section">
+                    <div class="container-fluid">
+                        <!-- ========== title-wrapper start ========== -->
+                        <div class="title-wrapper pt-20">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <div class="title mb-20">
+                                        <h2>
+                                            <%= title %>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-md-6">
+                                    <div class="breadcrumb-wrapper mb-20">
+                                        <div class="menu-toggle-btn mr-20">
+                                            <button id="showFormButton" class="main-btn primary-btn btn-hover">
+                                                <i class="lni lni-plus me-2"></i> Thêm mới
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <!-- end row -->
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-style mb-20">
+                                    <div class="table-responsive">
+                                        <table class="table top-selling-table">
+                                            <thead>
+                                                <tr>
+                                                    <!-- <th></th> -->
+                                                    <th>
+                                                        <h6 class="text-sm text-medium">id</h6>
+                                                    </th>
+                                                    <th class="min-width">
+                                                        <h6 class="text-sm text-medium">Tài Khoản</h6>
+                                                    </th>
+                                                    <th class="min-width">
+                                                        <h6 class="text-sm text-medium">Mật Khẩu</h6>
+                                                    </th>
+                                                    <th class="min-width">
+                                                        <h6 class="text-sm text-medium">Ngày bắt đầu</h6>
+                                                    </th>
+                                                    <th class="min-width">
+                                                        <h6 class="text-sm text-medium">Ngày kết thúc</h6>
+                                                    </th>
+                                                    <th class="min-width">
+                                                        <h6 class="text-sm text-medium">Trạng Thái</h6>
+                                                    </th>
+                                                    <th class="min-width">
+                                                        <h6 class="text-sm text-medium">Quyền truy cập</h6>
+                                                    </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% usersById.forEach(function(user) { %>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.MaTaiKhoan %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.TaiKhoan %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.MatKhau %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.NgayBatDau %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.NgayKetThuc %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm <%= user.TrangThai1.color %>">
+                                                                <i class="<%= user.TrangThai1.color %> <%= user.TrangThai1.icon %>"> 
+                                                    </i>
+                                                                <%= user.TrangThai1.text %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.LoaiQuyen %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="action justify-content-end">
+                                                                <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="lni lni-more-alt"></i>
+                                                    </button>
+                                                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
+
+                                                                    <li class="dropdown-item">
+                                                                        <a href="#0" class="text-gray">Remove</a>
+                                                                    </li>
+                                                                    <li class="dropdown-item">
+                                                                        <a href="#0" class="text-gray">Edit</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% }); %>
+
+                                            </tbody>
+                                        </table>
+                                        <!-- End Table -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Col -->
+                        </div>
+                        <!-- End Row -->
+                        <div class="title-wrapper pt-20">
+                            <div class="row align-items-center">
+                                <!-- end col -->
+                                <div class="col-md-6">
+                                    <div class="breadcrumb-wrapper mb-20">
+                                        <div class="menu-toggle-btn mr-20">
+                                            <a href="/admin/users">
+                                                <button id="showFormButton" class="main-btn danger-btn btn-hover">
+                                                    <i class="lni lni-chevron-left"></i> Quay lại
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <!-- end row -->
+                        </div>
+                    </div>
+                    <!-- end container -->
+
+                </section>
+                <!-- ========== section end ========== -->
+
+                <!-- ========== footer start =========== -->
+                <%- include('../shared/admin/footer-mini') -%>
+                    <!-- ========== footer end =========== -->
+        </main>
+        <!-- ======== main-wrapper end =========== -->
+        <%- include('../shared/admin/footer') -%>

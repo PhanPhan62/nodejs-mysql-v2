@@ -1,0 +1,77 @@
+<%- include('../shared/admin/header') -%>
+    <!-- ======== sidebar-nav start =========== -->
+    <%- include('../shared/admin/menu-left') -%>
+        <!-- ======== sidebar-nav end =========== -->
+
+        <!-- ======== main-wrapper start =========== -->
+        <main class="main-wrapper">
+            <!-- ========== header start ========== -->
+            <%- include('../shared/admin/menu-top') -%>
+                <!-- ========== header end ========== -->
+
+                <div class="card-style mb-30">
+                    <h6 class="mb-25">
+                        <%= title %>
+                    </h6>
+                    <form action="/admin/users/edit/<%= users.MaTaiKhoan %>" method="post" class="">
+                        <div class="select-style-1">
+                            <div class="select-position">
+                                <select name="MaNhanVien">
+                                        <option value="<%= users.MaNhanVien %>">---------- Nhân Viên ----------</option>
+                                        <% nhanvien.forEach(function(item) { %>
+                                            <option value="<%= item.MaNhanVien %>">
+                                                <%= item.HoTen %>
+                                            </option>
+                                        <% }); %>
+                                    </select>
+                            </div>
+                        </div>
+                        <!-- end select -->
+                        <div class="input-style-3">
+                            <input type="text" name="TaiKhoan" value="<%= users.TaiKhoan %>" placeholder="<%= users.TaiKhoan %>" />
+                            <span class="icon"><i class="lni lni-user"></i></span>
+                        </div>
+                        <div class="input-style-3">
+                            <input type="text" name="MatKhau" value="<%= users.MatKhau %>" placeholder="<%= users.MatKhau %>" />
+                            <span class="icon"><i class="lni lni-lock-alt"></i></span>
+                        </div>
+                        <div class="select-style-1">
+                            <div class="select-position">
+                                <select name="TrangThai">
+                                    <option value="1" <%= users.TrangThai === 1 ? 'selected' : '' %>>Hoạt động</option>
+                                    <option value="0" <%= users.TrangThai === 0 ? 'selected' : '' %>>Ngừng hoạt động</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-style-3 dpflex">
+                            <input id="endDate" pattern="\d{4}-\d{2}-\d{2}" required class="w-50p mr-10" type="date" name="NgayBatDau" value="<%= users.NgayBatDau %>" />
+                            <span class="icon"><i class="lni lni-star-half"></i></span>
+                        </div>
+
+                        <div class="input-style-3 ">
+                            <input id="startDate" pattern="\d{4}-\d{2}-\d{2}" required class="w-50p inputEndDate" type="date" name="NgayKetThuc" value="<%= users.NgayKetThuc %>" />
+                            <span class="icon"><i class="lni lni-star-half icondate"></i></span>
+                        </div>
+
+                        <div class="select-style-1">
+                            <div class="select-position">
+                                <select name="LoaiQuyen">
+                                    <option value="Admin" <%= users.LoaiQuyen === 'Admin' ? 'selected' : '' %>>Admin</option>
+                                    <option value="Nhân Viên" <%= users.LoaiQuyen === 'Nhân Viên' ? 'selected' : '' %>>Nhân Viên</option>
+                                </select>
+                            </div>
+                        </div>
+                        <a href="/admin/users">
+                            <button class="main-btn danger-btn btn-hover">Quay lại</button>
+                        </a>
+                        <button class="main-btn success-btn btn-hover" type="submit">Chỉnh sửa</button>
+                    </form>
+                </div>
+
+                <!-- ========== footer start =========== -->
+                <%- include('../shared/admin/footer-mini') -%>
+                    <!-- ========== footer end =========== -->
+        </main>
+        <!-- ======== main-wrapper end =========== -->
+        <%- include('../shared/admin/footer') -%>
