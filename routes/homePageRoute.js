@@ -4,5 +4,6 @@ const homePageController = require('../controllers/homePageController');
 
 // Create a new user
 router.get('/', homePageController.homePage);
-
+router.get('/sanpham', homePageController.product);
+router.get('/chitietsanpham/:id', homePageController.productDetail);
 module.exports = router;
