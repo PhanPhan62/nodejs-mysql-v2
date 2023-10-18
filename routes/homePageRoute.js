@@ -6,4 +6,7 @@ const homePageController = require('../controllers/homePageController');
 router.get('/', homePageController.homePage);
 router.get('/sanpham', homePageController.product);
 router.get('/chitietsanpham/:id', homePageController.productDetail);
+router.get('/phan', (res, req) => {
+    req.json("skjdhvkjsdv")
+});
 module.exports = router;
