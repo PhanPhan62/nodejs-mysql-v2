@@ -1,0 +1,255 @@
+<%- include('../shared/admin/header') -%>
+
+    <!-- ======== sidebar-nav start =========== -->
+    <%- include('../shared/admin/menu-left') -%>
+        <!-- ======== sidebar-nav end =========== -->
+
+        <!-- ======== main-wrapper start =========== -->
+        <main class="main-wrapper">
+            <!-- ========== header start ========== -->
+            <%- include('../shared/admin/menu-top') -%>
+                <!-- ========== header end ========== -->
+                <div id="overlay" class="overlay"></div>
+                <div id="hiddenForm" class="form-container" style="display: none;">
+                    <button id="closeFormButton"><i class="lni lni-close"></i></button>
+                    <form action="/admin/sp" method="post" class="">
+                        <h6 class="mb-25">
+                            Thêm
+                            <%= title %>
+                        </h6>
+                        <div class="select-style-1">
+                            <div class="select-position">
+                                <select name="MaLoai">
+                                    <option value="">---------- Loại ----------</option>
+                                    <% LoaiSP.forEach(function(item) { %>
+                                        <option value="<%= item.MaLoai %>">
+                                            <%= item.TenLoai %>
+                                        </option>
+                                    <% }); %>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- end select -->
+                        <div class="input-style-3">
+                            <input type="text" required name="TenSanPham" placeholder="Tên SP" />
+                            <span class="icon"><i class="lni lni-user"></i></span>
+                        </div>
+                        <div class="input-style-3">
+                            <input type="text" required name="MoTaSanPham" placeholder="Mô tả" />
+                            <span class="icon"><i class="lni lni-user"></i></span>
+                        </div>
+                        <div class="select-style-1">
+                            <div class="select-position">
+                                <select name="MaNSX">
+                                    <option value="">---------- Nhà sản xuất ----------</option>
+                                    <% NSX.forEach(function(item) { %>
+                                        <option value="<%= item.MaNSX %>">
+                                            <%= item.TenNSX %>
+                                        </option>
+                                    <% }); %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="select-style-1">
+                            <div class="select-position">
+                                <select name="MaDonViTinh">
+                                    <option value="">---------- Đơn vị tính ----------</option>
+                                    <% DVT.forEach(function(item) { %>
+                                        <option value="<%= item.MaDonViTinh %>">
+                                            <%= item.TenDonViTinh %>
+                                        </option>
+                                    <% }); %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-style-3">
+                            <input type="text" required name="AnhSanPham" placeholder="Ảnh" />
+                            <span class="icon"><i class="lni lni-user"></i></span>
+                        </div>
+                        <button class="main-btn info-btn btn-hover" type="submit">Thêm mới</button>
+                    </form>
+                </div>
+                <!-- ========== section start ========== -->
+                <section class="section">
+                    <div class="container-fluid">
+                        <!-- ========== title-wrapper start ========== -->
+                        <div class="title-wrapper pt-20">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <div class="title mb-20">
+                                        <h2>
+                                            <%= title %>
+                                        </h2>
+                                    </div>
+
+                                </div>
+                                <!-- end col -->
+                                <div class="col-md-6">
+                                    <div class="breadcrumb-wrapper mb-20">
+                                        <div class="menu-toggle-btn mr-20">
+                                            <button id="showFormButton" class="main-btn primary-btn btn-hover">
+                                                <i class="lni lni-plus me-2"></i> Thêm mới
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <!-- end row -->
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-style mb-20">
+                                    <div class="table-responsive">
+                                        <table class="table top-selling-table">
+                                            <thead>
+                                                <tr>
+                                                    <!-- <th></th> -->
+                                                    <th>
+                                                        <h6 class="text-sm text-medium">id</h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6 class="text-sm text-medium">Mã Loại</h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6 class="text-sm text-medium">Tên Sản Phẩm</h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6 class="text-sm text-medium">Mô tả Sản Phẩm</h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6 class="text-sm text-medium">Mã Nhà Sản xuất</h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6 class="text-sm text-medium">Mã Đơn vị tính</h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6 class="text-sm text-medium">Ảnh sản phẩm</h6>
+                                                    </th>
+
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% nhanvien.forEach(function(user) { %>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.MaSanPham %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.MaLoai %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.TenSanPham %>
+                                                            </p>
+                                                        </td>
+
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.MoTaSanPham %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.MaNSX %>
+                                                            </p>
+                                                        </td>
+
+                                                        <td>
+                                                            <p class="text-sm">
+                                                                <%= user.MaDonViTinh %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <img class="w100" style="width: 100px; height: 100px;" src="/images/products/<%= user.AnhSanPham %>" alt="">
+
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="action justify-content-end">
+                                                                <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="lni lni-more-alt"></i>
+                                                    </button>
+                                                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
+                                                                    <li class="dropdown-item">
+                                                                        <a href="/admin/sp/show/<%= user.MaSanPham %>" class="text-gray">Show</a>
+                                                                    </li>
+                                                                    <li class="dropdown-item">
+                                                                        <a href="" onclick="deleteUser('<%= user.MaSanPham %>')" class="text-gray ">Remove</a>
+                                                                    </li>
+                                                                    <li class="dropdown-item ">
+                                                                        <a href="/admin/sp/edit/<%=user.MaSanPham %>" class="text-gray">Edit</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% }); %>
+                                                        <script>
+                                                            function deleteUser(userId) {
+                                                                if (confirm('Bạn có chắc chắn muốn xóa? ')) {
+                                                                    fetch(`/admin/users/delete/${userId}`, {
+                                                                            method: 'DELETE',
+                                                                        })
+                                                                        .then(response => {
+                                                                            if (!response.ok) {
+                                                                                throw new Error('Lỗi khi xóa');
+                                                                            }
+                                                                            return response.json();
+                                                                        })
+                                                                        .then(data => {
+                                                                            alert(data.message);
+                                                                            location.reload(); // Tải lại trang sau khi xóa thành công
+                                                                        })
+                                                                        .catch(error => {
+                                                                            console.error(error);
+                                                                            alert('Đã có lỗi xảy ra.');
+                                                                        });
+                                                                }
+                                                            }
+                                                        </script>
+
+                                            </tbody>
+                                        </table>
+                                        <!-- End Table -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Col -->
+                        </div>
+                        <!-- End Row -->
+                    </div>
+                    <!-- end container -->
+
+                    <!-- Hiển thị các nút phân trang -->
+
+                    <nav aria-label="...">
+                        <ul class="pagination" style="transform: translatex(35%);">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="/admin/users?page=1" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="/admin/users?page=1">1</a></li>
+                            <li class="page-item ">
+                                <a class="page-link" href="/admin/users?page=2">2</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="/admin/users?page=3">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </section>
+                <!-- ========== section end ========== -->
+
+                <!-- ========== footer start =========== -->
+                <%- include('../shared/admin/footer-mini') -%>
+                    <!-- ========== footer end =========== -->
+        </main>
+        <!-- ======== main-wrapper end =========== -->
+        <%- include('../shared/admin/footer') -%>

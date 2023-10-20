@@ -7,6 +7,8 @@ const nhanvienRoute = require('./routes/nhanvienRoute');
 const loginRoutes = require('./routes/loginRoute');
 const menuRoutes = require('./routes/menuRoute');
 const homePage = require('./routes/homePageRoute');
+const DVT = require('./routes/DVTRoute');
+const sanphamRoute = require('./routes/sanphamRoute');
 const session = require('express-session');
 const flash = require('express-flash');
 const methodOverride = require('method-override');
@@ -33,7 +35,7 @@ app.use(flash());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', loginRoutes, nhanvienRoute, userRoutes, loaisanphamRoutes, menuRoutes);
+app.use('/admin', loginRoutes, nhanvienRoute, userRoutes, loaisanphamRoutes, menuRoutes, DVT, sanphamRoute);
 app.use('/', homePage);
 
 // Start the server

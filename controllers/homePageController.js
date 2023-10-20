@@ -34,7 +34,7 @@ exports.homePage = async(req, res, next) => {
             });
         });
         const bestSeller = await new Promise((resolve, reject) => {
-            const sql = "SELECT sp.TenSanPham, gsp.Gia, sp.AnhSanPham, MAX(ctdh.SoLuong * ctdh.GiaMua) AS MaxGiaMua FROM ChiTietDonHang ctdh INNER JOIN SanPham sp ON ctdh.MaSanPham = sp.MaSanPham INNER JOIN DonHang dh ON ctdh.MaDonHang = dh.MaDonHang INNER JOIN GiaSanPham gsp ON sp.MaSanPham = gsp.MaSanPham GROUP BY sp.TenSanPham, gsp.Gia, sp.AnhSanPham LIMIT 10";
+            const sql = "SELECT sp.MaSanPham, sp.TenSanPham, gsp.Gia, sp.AnhSanPham, MAX(ctdh.SoLuong * ctdh.GiaMua) AS MaxGiaMua FROM ChiTietDonHang ctdh INNER JOIN SanPham sp ON ctdh.MaSanPham = sp.MaSanPham INNER JOIN DonHang dh ON ctdh.MaDonHang = dh.MaDonHang INNER JOIN GiaSanPham gsp ON sp.MaSanPham = gsp.MaSanPham GROUP BY sp.MaSanPham, sp.TenSanPham, gsp.Gia, sp.AnhSanPham LIMIT 10 ";
             db.query(sql, (err, results) => {
                 if (err) {
                     reject(err);
@@ -53,7 +53,6 @@ exports.homePage = async(req, res, next) => {
                 }
             });
         });
-
         // Thực hiện truy vấn SQL thứ hai bằng async/await
         const category = await new Promise((resolve, reject) => {
             db.query('call getAllLoaiSPLimit4()', (err, results) => {
@@ -153,12 +152,23 @@ exports.productDetail = async(req, res, next) => {
         const userId = req.params.id;
 
         const procductByID = await new Promise((resolve, reject) => {
-            const sql = "SELECT * FROM sanpham sp INNER JOIN giasanpham gsp ON gsp.`MaSanPham`=sp.`MaSanPham` WHERE sp.`MaSanPham` = ?";
+            const sql = "SELECT * FROM sanpham sp INNER JOIN giasanpham gsp ON gsp. `MaSanPham` = sp. `MaSanPham` INNER JOIN chitietanh cta ON sp.MaSanPham = cta.MaSanPham WHERE sp. `MaSanPham` = ? ";
             db.query(sql, userId, (err, results) => {
                 if (err) {
                     reject(err);
                 } else {
                     resolve(results);
+                    // console.log(results);
+                }
+            });
+        });
+        const procductByID1 = await new Promise((resolve, reject) => {
+            const sql = "SELECT * FROM sanpham sp INNER JOIN giasanpham gsp ON gsp.`MaSanPham`= sp.`MaSanPham` WHERE sp.`MaSanPham` = ?";
+            db.query(sql, userId, (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results[0]);
                 }
             });
         });
@@ -179,9 +189,11 @@ exports.productDetail = async(req, res, next) => {
                 } else {
                     res.render('home/productByID', {
                         procductByID: procductByID,
+                        procductByID1: procductByID1,
                         prdID: results,
                         categoryPass: categoryPass
                     });
+                    console.log(procductByID);
                 }
             });
         });

@@ -1,11 +1,11 @@
 const db = require('../connection');
 
-exports.getAllNV = async(req, res, next) => {
+exports.getAllDV = async(req, res, next) => {
     try {
-        const name = "Thông tin Nhân viên";
+        const name = "Thông tin Đơn vị tính";
         // Thực hiện truy vấn SQL thứ nhất bằng async/await
         const nhanvien = await new Promise((resolve, reject) => {
-            db.query('select * from nhanvien', (err, results) => {
+            db.query('select * from donvitinh', (err, results) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -20,7 +20,7 @@ exports.getAllNV = async(req, res, next) => {
                 if (err) {
                     reject(err);
                 } else {
-                    res.render('nhanvien/index', {
+                    res.render('dvt/index', {
                         title: name,
                         nhanvien: nhanvien
                     });
