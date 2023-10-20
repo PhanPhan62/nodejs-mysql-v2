@@ -193,7 +193,7 @@ exports.productDetail = async(req, res, next) => {
                         prdID: results,
                         categoryPass: categoryPass
                     });
-                    console.log(procductByID);
+                    // console.log(procductByID);
                 }
             });
         });
